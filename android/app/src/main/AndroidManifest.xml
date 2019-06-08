@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.tradinggame">
+  package="com.thirdessential.tradingapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

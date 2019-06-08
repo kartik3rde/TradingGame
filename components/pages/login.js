@@ -8,25 +8,122 @@
 
 import React, {Component} from 'react';
 
-import {Platform, StyleSheet ,View , ImageBackground } from 'react-native';
+import {Platform, StyleSheet ,View , ImageBackground  } from 'react-native';
 import { Container  ,Title ,Text 
   ,Subtitle,Button,Content,Body,
-  Input, Item ,Icon, Left, Right} from 'native-base';
-
+  Input, Item ,Icon, Left, Right,Form, Spinner} from 'native-base';
+import User from '../../controller/services/User';
+  const user = new User;
+  import AsyncStorage from '@react-native-community/async-storage';
 
 type Props = {}; 
 
 export default class Login extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      email_err:false,
+      email_message:'',
+      password:'',
+      password_err:false,
+      password_message:'',
+      loder:false
+    };
+    this.onLoginClick = this.onLoginClick.bind(this);
+    this.formValidation = this.formValidation.bind(this);
+  }
   static navigationOptions = {
     header: null
   }
+  formValidation(type,name,value,key,keyErr){
+    
+    if(type==="required"){
+      if(value.length>1 && value !==''){
+        return true;
+      }else{
+        console.log("error section")
+        const err= name + " is required";
+        this.setState( { [key] : true , [keyErr]:err } );
+        return false;
+      }
+    }
+    if(type==="email"){
+      var re = /\S+@\S+\.\S+/;
+      if(re.test(value)){
+        return true;
+      }else{
+        console.log("error section")
+        const err= name + " is not valided";
+        this.setState( { [key] : true , [keyErr]:err } );
+        return false;
+      }
+    }
+    if(type==="password"){
+      if(value.length>4 && value !==''){
+        return true;
+      }else{
+        console.log("error section")
+        const err= name + " should be grater then 4 character";
+        this.setState( { [key] : true , [keyErr]:err } );
+        return false;
+      }
+    }
+    
+  }
+  storeData = async (res) => {
+    try {
+      await AsyncStorage.setItem('userDetails',res )
+      console.log("resssssss",res)
+     
+    } catch (e) {
+     // console.log(e)
+      // saving error
+    }
+  }
+  onLoginClick(){
+    if(
+      this.formValidation('required','Email',this.state.email,'email_err','email_message') &&
+      this.formValidation('email','Email',this.state.email,'email_err','email_message')&&
+      this.formValidation('required','Password',this.state.password,'password_err','password_message')&&
+      this.formValidation('password','Password',this.state.password,'password_err','password_message')
+      ){
+        this.setState({
+          loder:true
+        })
+        const email=this.state.email;
+        const password=this.state.password
+        user.login(email,password)
+        .then(res=>{
+         // console.log(res);
+          if(res.status){
+            this.setState({
+              loder:false
+            })
+            
+            this.storeData(res.userdetals[0]);
+            this.props.navigation.navigate('Dashboard')
+          }else{
+            this.setState({
+              loder:false
+            })
+            alert(res.message);
+          }
+        })
+        
+
+      
+      }
+  }
+  
   render() {
   
     return (  
+      this.state.loder ? <Spinner color='blue' /> :
        <Container >
          <ImageBackground source={{uri: "http://goldenfuturelife.in/tradeGame/main.jpg"}} style={{width: '100%', height: '100%'}}> 
          <Content>
-         
+          
             <Title style={styles.title}>
               Relentless Trade 
             </Title>
@@ -36,26 +133,36 @@ export default class Login extends Component<Props> {
                 industry.
             </Text>
            <Body style={styles.loginSection}>
-                  <Item regular style={styles.loginInput}>
-                    <Input placeholder='Email' />
+                <Form >
+                  <Item regular style={this.state.email_err ? styles.loginInputError :styles.loginInput} >
+                    <Input placeholder='Email' 
+                    onChangeText={(email) => this.setState({email,email_err:false})}
+                    value={this.state.email}
+                    name="email" />
                     <Icon active name='md-person' />
                   </Item>
+                 {this.state.email_err && <Text style={styles.errorMsg}>{this.state.email_message}</Text> }
                   <Item regular style={styles.loginInput}>
-                    <Input placeholder='Password' />
+                    <Input placeholder='Password' 
+                     onChangeText={(password) => this.setState({password})}
+                     value={this.state.password}
+                     name="password" />
                     <Icon  name='md-eye' />
                   </Item>
+                  {this.state.password_err && <Text style={styles.errorMsg}>{this.state.password_message}</Text> }
                   <Item  style={styles.link}>
                       <Text style={styles.link}>Forgot Password ?</Text>
                   </Item>
-                  <Button block danger style={styles.marginTB10}>
-                      <Text>Login</Text>
+                  <Button block danger onPress={this.onLoginClick} style={styles.marginTB10}>
+                      <Text >Login</Text>
                   </Button>
                   <Button block light style={styles.marginTB10} onPress={() => this.props.navigation.navigate('Registration')}>
                     <Text >Signup</Text>
                   </Button>
+                </Form>
 
                   
-                  <View style={styles.socailLogin}>
+                  {/* <View style={styles.socailLogin}>
                   <Button iconLeft small  danger style={styles.floatLeft}>
                       <Icon name='logo-googleplus' />
                       <Text style={styles.font5}>Login with Google</Text>
@@ -66,7 +173,7 @@ export default class Login extends Component<Props> {
                       <Icon name='logo-facebook' />
                       <Text style={styles.font5}>Login with Facebook</Text>
                     </Button>
-                  </View>
+                  </View> */}
              </Body>
           </Content>
         </ImageBackground>
@@ -83,7 +190,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    color: '#8D8D8D',
+    color: '#111111',
     fontSize: 25,
     marginTop: 50,
     margin:5
@@ -93,7 +200,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    color: '#8D8D8D',
+    color: '#111111',
     margin:25
    },
    loginSection:{
@@ -101,12 +208,25 @@ const styles = StyleSheet.create({
    },
    loginInput:{
      marginTop:10,
-     marginBottom:10
+     marginBottom:10,
+     borderRadius: 4,
+     borderWidth: 1,
+     borderColor: '#111111',
+     backgroundColor:"#ffffff"
+   },
+   loginInputError:{
+    marginTop:10,
+    marginBottom:10,
+    borderRadius: 4,
+    borderWidth: 10,
+    borderColor: '#F10909',
+    backgroundColor:"#ffffff"
    },
    link:{
      textAlign:'right',
      width:"100%",
      flex: 1,
+     
    },
    fullWidth:{
      width:"100%"
@@ -121,7 +241,7 @@ const styles = StyleSheet.create({
    socailLogin:{
      flex:1,
      flexDirection:"row",
-     marginTop:10
+     marginTop:1
     },
    floatLeft:{
      width:"50%",
@@ -134,6 +254,9 @@ const styles = StyleSheet.create({
      flex:.5,
     alignItems: 'center',
     marginLeft:5
+   },
+   errorMsg:{
+     color:'#F10909'
    }
   
  

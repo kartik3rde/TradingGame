@@ -13,18 +13,21 @@ import { Container  ,Title ,Text
   ,Subtitle,Button,Content,Body,
   Input, Item ,Icon, Left, Right} from 'native-base';
 
-
-type Props = {}; 
-
-export default class Welcome extends Component<Props> {
+export default class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state ={ isLoggedIn: false };
   }
 
-  // componentDidMount() {
-  //   setTimeout(this.props.navigation.navigate('Login'),10000)
-  // }
+  componentDidMount() {
+    var a=0;
+    setInterval(()=>{
+      if(a===2){
+        this.props.navigation.navigate('Login')
+      }
+      a=a+1;
+    },1000)
+  }
   static navigationOptions = {
     header: null
   }
@@ -44,7 +47,7 @@ export default class Welcome extends Component<Props> {
             <Text style={styles.smalltext}>
                 Trading
             </Text>
-            <Button transparent success ><Text onPress={() => this.props.navigation.navigate('Login')}> Go to Details </Text></Button>
+            {/* <Button transparent success ><Text onPress={() => this.props.navigation.navigate('Dashboard')}> Go to Details </Text></Button> */}
             
         </Content>
         {/* </ImageBackground> */}

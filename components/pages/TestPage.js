@@ -16,8 +16,8 @@ import { Container   ,Text ,Content,Body,Spinner,
 import SideBar from "../elements/Sidebar"
 import CourseList from "../elements/courseList";
 import HeaderPage from "../elements/HeaderPage";
-                
-export default class Dashboard extends Component {
+import Swiper from 'react-native-swiper-animated';               
+export default class TestPage extends Component {
   static navigationOptions = {
     header: null
   }
@@ -69,11 +69,9 @@ export default class Dashboard extends Component {
         
         {membershipData && membershipData.length>0 ?
         membershipData.map((member,index)=>
-         <CourseList  courseArray={courseData[index]} navigationList={this.props.navigation} key={index} />
-          
-        
-           
-          
+            <Card key={index}>
+               <CourseList  courseArray={courseData[index]} navigationList={this.props.navigation} key={index} />
+            </Card> 
         )
         
         : 
@@ -87,9 +85,7 @@ export default class Dashboard extends Component {
         }
       </Content>
     </Container>                
-  
-  
-    );
+   );
   }
 }
 
