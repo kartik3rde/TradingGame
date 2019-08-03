@@ -50,5 +50,41 @@ export default class User{
   
           
         }
+        forgotPass(email){
+            let formData = {email: email};
+            const encodeForm = (data) => {
+                return Object.keys(data)
+                    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+                    .join('&');
+                }
+           
+            return  axios.post(apiUrl+"/forgotPasswordSendEmail", encodeForm(formData), {headers: {'Accept': 'application/json'}})
+                  .then(function (response) {
+                      console.log("response",response);
+                      return response.data
+                  })
+                  .catch(function (error) {
+                     // console.log("errrrrrr",error);
+                     return false
+              });
+        }
+        updateNewPassword(userId,password){
+            let formData = {id: userId , password:password};
+            const encodeForm = (data) => {
+                return Object.keys(data)
+                    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+                    .join('&');
+                }
+           
+            return  axios.post(apiUrl+"/updatePassword", encodeForm(formData), {headers: {'Accept': 'application/json'}})
+                  .then(function (response) {
+                      //console.log("response",response);
+                      return response.data
+                  })
+                  .catch(function (error) {
+                     // console.log("errrrrrr",error);
+                     return false
+              });
+        }
   
 }

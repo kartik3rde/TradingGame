@@ -9,8 +9,10 @@
 import React, { Component } from 'react';
 import Dashboard from "./pages/dashboard";
 import Login from "./pages/login";
+import ForgotPassword from "./pages/ForgotPassword";
 import Welcome from "./pages/welcome";
 import Registration from "./pages/registration";
+import SavePassword from "./pages/SavePassword";
 import CourseSingle from "./pages/CourseSingle";
 import Game from "./pages/Game";
 import Game2 from "./pages/Game2";
@@ -94,6 +96,12 @@ const AppNavigator = createSwitchNavigator({
   App : {
     screen: inAppNavigator
     ,
+  },
+  ForgotPassword :{
+    screen :ForgotPassword
+  },
+  SavePassword:{
+    screen : SavePassword
   }
 },
 {

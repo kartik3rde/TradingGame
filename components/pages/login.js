@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
 
 import React, { Component } from 'react';
 
@@ -17,7 +10,7 @@ import {
 import User from '../../controller/services/User';
 const user = new User;
 import AsyncStorage from '@react-native-community/async-storage';
-//import FacebookLogin from 'react-facebook-login';
+
 type Props = {};
 
 export default class Login extends Component<Props> {
@@ -124,7 +117,6 @@ export default class Login extends Component<Props> {
   }
   render() {
     const { passwordStatus, password } = this.state;
-    //http://goldenfuturelife.in/tradeGame/main.jpg
     return (
       this.state.loder ? <Spinner color='blue' /> :
         <Container >
@@ -157,7 +149,7 @@ export default class Login extends Component<Props> {
                     <Icon name={passwordStatus ? 'md-eye' : 'md-eye-off'} onPress={() => { this.setState({ passwordStatus: !passwordStatus }) }} />
                   </Item>
                   {this.state.password_err && <Text style={styles.errorMsg}>{this.state.password_message}</Text>}
-                  <Item style={styles.link}>
+                  <Item style={styles.link} onPress={() => this.props.navigation.navigate('ForgotPassword')}>
                     <Text style={styles.link}>Forgot Password ?</Text>
                   </Item>
                   <Button block danger onPress={this.onLoginClick} style={styles.marginTB10}>
@@ -175,13 +167,11 @@ export default class Login extends Component<Props> {
                     <Text style={styles.font5}>Login with Google</Text>
                   </Button>
                  
-                
-
-
-                  <Button iconLeft small style={styles.floatRight}>
+                   <Button iconLeft small style={styles.floatRight}>
                     <Icon name='logo-facebook' />
                     <Text style={styles.font5}>Login with Facebook</Text>
                   </Button>
+               
                 </View>
               </Body>
             </Content>
