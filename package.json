@@ -15,14 +15,17 @@
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.3",
+    "react-native-carousel-control": "^2.0.1",
     "react-native-gesture-handler": "^1.1.0",
+    "react-native-hide-show-password-input": "^1.1.0",
     "react-native-htmlview": "^0.14.0",
     "react-native-loader": "^1.2.1",
     "react-native-render-html": "^4.1.2",
     "react-native-side-drawer": "^1.1.5",
     "react-native-splash-screen": "^3.2.0",
     "react-native-swiper-animated": "^1.5.3",
-    "react-navigation": "^3.7.1"
+    "react-navigation": "^3.7.1",
+    "react-social-login": "^3.4.4"
   },
   "devDependencies": {
     "@babel/core": "7.4.3",

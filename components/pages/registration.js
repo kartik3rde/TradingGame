@@ -40,7 +40,9 @@ export default class Registration extends Component<Props> {
       conpassword:'',
       conpassword_err:false,
       conpassword_message:'',
-      loder:false
+      loder:false,
+      passwordStatus:true,
+      passwordconStatus:true
     };
     this.onRegClick = this.onRegClick.bind(this);
     this.formValidation = this.formValidation.bind(this);
@@ -139,11 +141,11 @@ export default class Registration extends Component<Props> {
      
   }
   render() {
-  
+    const {passwordStatus,passwordconStatus} = this.state
     return (  
       this.state.loder ? <Spinner color='blue' /> :
        <Container >
-         <ImageBackground source={{uri: "http://goldenfuturelife.in/tradeGame/main.jpg"}} style={{width: '100%', height: '100%'}}> 
+         <ImageBackground source={{uri: "https://carz91.com/tradeGame/main.jpg"}} style={{width: '100%', height: '100%'}}> 
          <Content>
          
             <Title style={styles.title}>
@@ -187,8 +189,10 @@ export default class Registration extends Component<Props> {
                      onChangeText={(password) => this.setState({password,password_err:false})}
                      value={this.state.password}
                      name="password"
+                     secureTextEntry={passwordStatus}
                       />
-                    <Icon  name='md-eye' />
+                      <Icon  name={passwordStatus ? 'md-eye':'md-eye-off'} onPress={()=>{this.setState({passwordStatus:!passwordStatus})}} />
+                   
                   </Item>
                   {this.state.password_err && <Text style={styles.errorMsg}>{this.state.password_message}</Text> }
                   <Item regular style={this.state.conpassword_err ? styles.loginInputError :styles.loginInput}>
@@ -196,8 +200,9 @@ export default class Registration extends Component<Props> {
                     onChangeText={(conpassword) => this.setState({conpassword,conpassword_err:false})}
                     value={this.state.conpassword}
                     name="confirmPassword"
+                    secureTextEntry={passwordconStatus}
                      />
-                    <Icon  name='md-eye' />
+                     <Icon  name={passwordconStatus ? 'md-eye':'md-eye-off'} onPress={()=>{this.setState({passwordconStatus:!passwordconStatus})}} />
                   </Item>
                   {this.state.conpassword_err && <Text style={styles.errorMsg}>{this.state.conpassword_message}</Text> }
                   <Button block danger onPress={this.onRegClick} style={styles.marginTB10}>

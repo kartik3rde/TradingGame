@@ -64,7 +64,7 @@ export default class CourseSingle extends Component {
   }
 
   render() {
-    const {courseData , baseUrl ,  loder }=this.state;
+    const {courseData , baseUrl ,  loder ,courseId }=this.state;
     const imageUrl = baseUrl+courseData.image;
     const fullWidth = Dimensions.get('window').width - 30
    return (  
@@ -85,8 +85,13 @@ export default class CourseSingle extends Component {
                   width: fullWidth
                 }]} imagesMaxWidth={fullWidth} /> 
             </Body>
-            <Button block light style={styles.marginTB10} onPress={() => this.props.navigation.navigate('Game')}>
-              <Text >Start Game</Text>
+            <Button block light style={styles.marginTB10} 
+              onPress={() => this.props.navigation.navigate('LessionPage',{itemId: courseId})}>
+              <Text >Start Lession</Text>
+            </Button>
+            <Button block light style={styles.marginTB10} 
+              onPress={() => this.props.navigation.navigate('QuizPage',{itemId: courseId})}>
+              <Text >Start Quiz</Text>
             </Button>
         </View>
       </Content>

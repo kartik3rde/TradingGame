@@ -40,7 +40,7 @@ export default class User{
            
             return  axios.post(apiUrl+"/Registration", encodeForm(formData), {headers: {'Accept': 'application/json'}})
                   .then(function (response) {
-                      console.log("response",response);
+                     // console.log("response",response);
                       return response.data
                   })
                   .catch(function (error) {

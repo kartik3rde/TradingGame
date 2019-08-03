@@ -1,4 +1,6 @@
 rootProject.name = 'tradingapp'
+include ':react-native-fbsdk'
+project(':react-native-fbsdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fbsdk/android')
 include ':@terrylinla_react-native-sketch-canvas'
 project(':@terrylinla_react-native-sketch-canvas').projectDir = new File(rootProject.projectDir, '../node_modules/@terrylinla/react-native-sketch-canvas/android')
 include ':@react-native-community_async-storage'

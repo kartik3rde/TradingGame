@@ -8,8 +8,8 @@
  */
 
 import React, {Component} from 'react';
-import { StyleSheet  ,Image  } from 'react-native';
-import { Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { StyleSheet  ,ImageBackground  } from 'react-native';
+import { Header, Content, Card, CardItem, Text,  Body,  } from 'native-base';
 import {baseUrl} from '../../config';
 
 export default class CourseList extends Component {
@@ -33,23 +33,14 @@ export default class CourseList extends Component {
     <Content>
        {courseArray && courseArray.length>0 ?
           courseArray.map((course,index)=>
-          <Card>
+          <Card style={styles.card}>
             
-            <CardItem cardBody >
-              <Image source={{uri: baseUrl +course.image}} onPress={() => this.props.navigationList.navigate('CourseSingle',{itemId: course.id})} style={{height: 200, width: null, flex: 1}}/>
+            <CardItem cardBody onPress={() => this.props.navigation.navigate('LessionPage',{itemId: course.id , itemName : course.title})}  >
+            <ImageBackground source={{uri: baseUrl +course.image}} style={{width: '100%', height: 200}}>
+            <Text style={styles.courseDoneMsg} onPress={() => this.props.navigation.navigate('LessionPage',{itemId: course.id , itemName : course.title})} >{course.title}</Text>
+            </ImageBackground>
             </CardItem>
-            <CardItem>
-              <Left>
-                <Body onPress={() => this.props.navigationList.navigate('CourseSingle',{itemId: course.id})}>
-                  
-                  <Button onPress={() => this.props.navigationList.navigate('CourseSingle',{itemId: course.id})} primary>
-                    <Text style={styles.courseTitle} >
-                    {course.title}
-                    </Text>
-                  </Button>
-                </Body>
-              </Left>
-            </CardItem>
+          
           </Card>
           )
           : 
@@ -77,7 +68,9 @@ const styles = StyleSheet.create({
     fontSize:18
    },
    card:{
-    padding:5
+    padding:5,
+    marginBottom:20
+
    },
    courseTitledetails:{
     flex: 1,
@@ -92,6 +85,16 @@ const styles = StyleSheet.create({
    body:{
     backgroundColor:'#1c1b1b47',
     width:"100%"
-   }
+   },
+   courseDoneMsg: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    color: '#fff',
+    backgroundColor:"#cccccc47",
+    fontSize: 30,
+    paddingTop:70
+}
   
 });

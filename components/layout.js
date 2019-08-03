@@ -18,35 +18,103 @@ import Game3 from "./pages/Game3";
 import Game4 from "./pages/Game4";
 import Game5 from "./pages/Game5";
 import About from "./pages/About";
-import { createStackNavigator, createAppContainer } from 'react-navigation'; // 
-const RootStack = createStackNavigator(
-  {
-    Home: Welcome,
-    Login: Login,
-    Registration: Registration,
-    Dashboard:Dashboard,
-    CourseSingle:CourseSingle,
-    Game:Game,
-    Game2:Game2,
-    Game3:Game3,
-    Game4:Game4,
-    Game5:Game5,
-    About:About,
-    Course:Dashboard
+import QuizPage from "./pages/QuizPage";
+import LessionPage from "./pages/LessionPage";
+import { View, Text, Button } from "react-native";
+import SideDrawer from "./elements/SideDrawer"
+import { createStackNavigator, createAppContainer ,createDrawerNavigator,createSwitchNavigator} from 'react-navigation'; // 
+// const RootStack = createStackNavigator(
+//   {
+//     Home: Welcome,
+//     Login: Login,
+//     Registration: Registration,
+//     Dashboard:Dashboard,
+//     CourseSingle:CourseSingle,
+//     Game:Game,
+//     Game2:Game2,
+//     Game3:Game3,
+//     Game4:Game4,
+//     Game5:Game5,
+//     About:About,
+//     Course:Dashboard,
+//     QuizPage:QuizPage,
+//     LessionPage:LessionPage
+//   },
+//   { 
+//     initialRouteName: 'Dashboard',
+//   }
+// );
+
+// const AppContainer = createAppContainer(RootStack);
+
+// export default class Layout extends Component {
+  
+//   render() {
+//     return <AppContainer />;
+//   }
+  
+// }
+const setDrawerScreen = screen => ( {
+  screen,
+  navigationOptions: {
+    header: null,
+  }
+})
+const inAppNavigator = createDrawerNavigator({
+  screen: createStackNavigator({
+     Dashboard:setDrawerScreen(Dashboard),
+     About:setDrawerScreen(About),
+     LessionPage:setDrawerScreen(LessionPage),
+     QuizPage:setDrawerScreen(QuizPage)
+    }, {
+    navigationOptions: {
+      header: null,
+      headerMode: 'none',
+    }
+  })
+},
+{
+  contentComponent: SideDrawer
+})
+const AppNavigator = createSwitchNavigator({
+  Welcome: {
+    screen: Welcome,
+    header: null,
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false,
+    }
   },
-  { 
-    initialRouteName: 'Home',
+  Login: {
+    screen: Login,
+  },
+  Register: {
+    screen: Registration,
+  },
+  App : {
+    screen: inAppNavigator
+    ,
   }
-);
-
-const AppContainer = createAppContainer(RootStack);
-
+},
+{
+  initialRouteName: 'Welcome',
+  /* The header config from HomeScreen is now here */
+  defaultNavigationOptions: {
+    header: null,
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
+  },
+});
+const AppContainer  = createAppContainer(AppNavigator)
 export default class Layout extends Component {
-  
-  render() {
-    return <AppContainer />;
+  render(){
+   return (
+       <AppContainer />
+     
+    )
   }
-  
 }
 
 

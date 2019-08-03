@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import {StyleSheet } from 'react-native';
 import { Container   ,Text ,Content,Body,} from 'native-base';
-import SideBar from "../elements/Sidebar"
-import HeaderPage from "../elements/HeaderPage";
+import MainHeader from "../elements/Header"
 
 export default class About extends Component {
   static navigationOptions = {
@@ -32,9 +31,11 @@ export default class About extends Component {
   return (  
    
     <Container >
-      
-      <HeaderPage pageTitle="Courses "  toggleOpen={()=>this.toggleOpen()} />
-      {this.state.open && <SideBar navigation={this.props.navigation} style={StyleSheet.animatedBox}/> }
+       <MainHeader navigation={this.props.navigation}
+            title="About"
+            /> 
+      {/* <HeaderPage pageTitle="Courses "  toggleOpen={()=>this.toggleOpen()} />
+      {this.state.open && <SideBar navigation={this.props.navigation} style={StyleSheet.animatedBox}/> } */}
      
       <Content>
           <Body >

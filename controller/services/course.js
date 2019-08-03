@@ -8,9 +8,7 @@ export default class Course{
 
     }
    courseWithMembership() {
-    
-     // let formData = {email: email, password: password};
-      const encodeForm = (data) => {
+     const encodeForm = (data) => {
             return Object.keys(data)
                 .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
                 .join('&');
@@ -25,8 +23,6 @@ export default class Course{
                     console.log(error);
                    return false
             });
-            console.log("uuuuuuuuuuuuuuuuuuuuuuu");
-
         
       }
       getSingleCourses(id) {
@@ -38,7 +34,7 @@ export default class Course{
           //console.log(encodeForm(formData));
           return  axios.get(apiUrl+"/getSingleCourse/"+id, {headers: {'Accept': 'application/json'}})
                 .then(function (response) {
-                    console.log(response);
+                  //  console.log(response);
                     return response.data
                 })
                 .catch(function (error) {

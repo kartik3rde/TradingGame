@@ -3,6 +3,7 @@ package com.thirdessential.tradingapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+//import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -10,7 +11,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
+//import org.devio.rn.splashscreen.SplashScreenReactPackage;
 // react-native-splash-screen < 0.3.1 
 //import com.cboy.rn.splashscreen.SplashScreenReactPackage;
 
@@ -29,9 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+           // new FBSDKPackage(),
             new SketchCanvasPackage(),
             new AsyncStoragePackage(),
-          new SplashScreenReactPackage() , //here 
+         // new SplashScreenReactPackage() , //here 
             new RNGestureHandlerPackage()
       );
     }

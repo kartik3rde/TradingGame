@@ -12,11 +12,12 @@ import Course from '../../controller/services/course';
 const course = new Course;
 import {Platform, StyleSheet } from 'react-native';
 import { Container   ,Text ,Content,Body,Spinner,
-  CardItem,Card} from 'native-base';
+  CardItem,Card , Header} from 'native-base';
 import SideBar from "../elements/Sidebar"
 import CourseList from "../elements/courseList";
-import HeaderPage from "../elements/HeaderPage";
-                
+//import HeaderPage from "../elements/HeaderPage";
+import MainHeader from "../elements/Header";      
+import AsyncStorage from '@react-native-community/async-storage'        
 export default class Dashboard extends Component {
   static navigationOptions = {
     header: null
@@ -34,6 +35,8 @@ export default class Dashboard extends Component {
   }
   componentDidMount(){
      this.getCourseWithMembership();
+     const value =  AsyncStorage.getItem('user');
+      console.log('xxxxxxxxyyyyyy',value);    
   }
   
  toggleOpen(){
@@ -61,18 +64,15 @@ export default class Dashboard extends Component {
   return (  
     loder ? <Spinner color='blue' /> : 
     <Container >
-      
-      <HeaderPage pageTitle="Courses "  toggleOpen={()=>this.toggleOpen()} />
-      {this.state.open && <SideBar navigation={this.props.navigation} style={StyleSheet.animatedBox}/> }
-     
+    
+       <MainHeader navigation={this.props.navigation}
+            title="Course"
+            /> 
       <Content>
         
         {membershipData && membershipData.length>0 ?
         membershipData.map((member,index)=>
-         <CourseList  courseArray={courseData[index]} navigationList={this.props.navigation} key={index} />
-          
-        
-           
+         <CourseList  courseArray={courseData[index]} navigation={this.props.navigation} key={index} />
           
         )
         
