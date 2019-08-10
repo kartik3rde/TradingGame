@@ -18,9 +18,9 @@ class SideDrawer extends Component {
        // getUser().then((responseText) => responseText)
        // .then((response) => this.setState({userName: response.name}));
     }
-    componentWillUnmount(){
-        removeAndroidBackButtonHandler()
-    }
+    // componentWillUnmount(){
+    //     removeAndroidBackButtonHandler()
+    // }
     removeUser = async ()=> {
         try {
             const value = await AsyncStorage.removeItem('user', (user)=>{
@@ -43,11 +43,24 @@ class SideDrawer extends Component {
                     this.hideSideMenu();
                 }},
                 {text: 'OK', onPress: () => {
-                    
+                    this.hideSideMenu();
+                    this.removeUser();
                 }}
             ]);
         
     };
+
+    removeUser = async ()=> {
+        try {
+            const value = await AsyncStorage.removeItem('user', (user)=>{
+                console.log('top Error', user);
+                this.pushAndCloseSideMenu("Login")
+            });
+        } catch (error) {
+            console.error("bottom error", error)
+        }
+    }
+
     
     handleBack(){
         this.props.navigation.closeDrawer()

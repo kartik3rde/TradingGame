@@ -1,6 +1,7 @@
 package com.thirdessential.tradingapp;
 import android.os.Bundle; // here 
 import com.facebook.react.ReactActivity;
+//import android.content.Intent;
 //import org.devio.rn.splashscreen.SplashScreen; // here 
 //import com.cboy.rn.splashscreen.SplashScreen; // here 
 public class MainActivity extends ReactActivity {
@@ -18,4 +19,10 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "tradingapp";
     }
+    //Facebook login
+    // @Override
+    // public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    //     super.onActivityResult(requestCode, resultCode, data);
+    //     MainApplication.getCallbackManager().onActivityResult(requestCode, resultCode, data);
+    // }  
 }
