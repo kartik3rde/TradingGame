@@ -37,7 +37,8 @@ export default class SingleLessonSlide extends Component {
             isVisible
         } = this.state
         console.log({
-            courseId
+            courseId,
+            slideImage: baseUrl + slide.image
         })
         const fullWidth = Dimensions.get('window').width - 20;
         return (
@@ -69,8 +70,8 @@ export default class SingleLessonSlide extends Component {
                                     source: {
                                         uri: baseUrl + slide.image
                                     },
-                                    width: 806,
-                                    height: 720,
+                                    width: this.state.width ? this.state.width : null,
+                                    height: this.state.height ? this.state.height : null,
 
                                 }
                             ]}
@@ -80,8 +81,26 @@ export default class SingleLessonSlide extends Component {
                             this.viewImage()
                           }}
                         >
-                            <Image 
-                            source={{ uri: baseUrl + slide.image }} style={{ height: 250, width: fullWidth, flex: 1 }} />
+                            <View style={{
+                                flex: 1,                          
+                                flexDirection:'row'
+                            }}>
+                                <Image 
+                                onLoad={(e)=> {
+                                    console.log("eeee",e.target)
+                                    Image.getSize(baseUrl + slide.image, (width, height) => {this.setState({width, height}, ()=> {
+                                        console.log({
+                                            width, height
+                                        })
+                                    })});
+                                }}
+                                    resizeMode="contain"
+                                source={{ uri: baseUrl + slide.image }} style={{ 
+                                    height:  this.state.height && this.state.width ? (parseInt(fullWidth)  * this.state.height / this.state.width ) : null, 
+                                    width: fullWidth, 
+                                    flex: 1 ,
+                                    }} />
+                            </View>
                         </TouchableNativeFeedback >
                         <Text style={styles.heading}>{slide.title}</Text>
                         <HTML html={slide.details} containerStyle={[{
