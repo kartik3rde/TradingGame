@@ -11,9 +11,7 @@ import User from '../../controller/services/User';
 const user = new User;
 import AsyncStorage from '@react-native-community/async-storage';
 
-type Props = {};
-
-export default class Login extends Component<Props> {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,6 +30,7 @@ export default class Login extends Component<Props> {
   static navigationOptions = {
     header: null
   }
+  
   formValidation(type, name, value, key, keyErr) {
 
     if (type === "required") {
@@ -77,17 +76,19 @@ export default class Login extends Component<Props> {
 
 
   onLoginClick() {
+    const {
+      email,
+      password
+    } = this.state
     if (
-      this.formValidation('required', 'Email', this.state.email, 'email_err', 'email_message') &&
-      this.formValidation('email', 'Email', this.state.email, 'email_err', 'email_message') &&
-      this.formValidation('required', 'Password', this.state.password, 'password_err', 'password_message') &&
-      this.formValidation('password', 'Password', this.state.password, 'password_err', 'password_message')
+      this.formValidation('required', 'Email', email, 'email_err', 'email_message') &&
+      this.formValidation('email', 'Email', email, 'email_err', 'email_message') &&
+      this.formValidation('required', 'Password', password, 'password_err', 'password_message') &&
+      this.formValidation('password', 'Password', password, 'password_err', 'password_message')
     ) {
       this.setState({
         loder: true
       })
-      const email = this.state.email;
-      const password = this.state.password
       user.login(email, password)
         .then(res => {
           // console.log(res);

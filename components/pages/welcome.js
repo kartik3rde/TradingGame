@@ -13,20 +13,28 @@ import { Container  ,Title ,Text
   ,Subtitle,Button,Content,Body,
   Input, Item ,Icon, Left, Right} from 'native-base';
 
+import AsyncStorage from '@react-native-community/async-storage';
+
 export default class Welcome extends Component {
   constructor(props) {
     super(props);
     this.state ={ isLoggedIn: false };
   }
 
-  componentDidMount() {
-    var a=0;
-    setInterval(()=>{
-      if(a===2){
+  componentDidMount() {    
+    AsyncStorage.getItem('user').then(res => {
+      
+      const user  = JSON.parse(res)
+      if(user.id){
+        this.props.navigation.navigate('Dashboard')
+      }else{
         this.props.navigation.navigate('Login')
       }
-      a=a+1;
-    },1000)
+    })
+    .catch(err => {
+      console.log({err})
+      this.props.navigation.navigate('Login')
+    })
   }
   static navigationOptions = {
     header: null
