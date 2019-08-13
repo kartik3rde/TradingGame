@@ -7,6 +7,9 @@ import {
   , Subtitle, Button, Content, Body,
   Input, Item, Icon, Left, Right, Form, Spinner
 } from 'native-base';
+import { LoginButton, AccessToken, 
+  LoginManager 
+} from 'react-native-fbsdk';
 import User from '../../controller/services/User';
 const user = new User;
 import AsyncStorage from '@react-native-community/async-storage';
@@ -66,6 +69,19 @@ export default class Login extends Component {
     }
 
   }
+  componentDidMount(){
+    AccessToken.getCurrentAccessToken().then(
+      (data) => {
+        console.log({
+          data
+        })
+        if(data.accessToken){
+          this.props.navigation.navigate('Dashboard')
+        }
+        console.log(data.accessToken.toString())
+      }
+    )
+  }
   storeUser = async (user) => {
     try {
       await AsyncStorage.setItem('user', user);
@@ -73,8 +89,28 @@ export default class Login extends Component {
       console.error(error);
     }
   }
-
-
+  facebookLogin = () => {
+    console.log({
+      LoginManager
+    })
+    LoginManager.logInWithPermissions(['public_profile', 'email']).then(
+      result => {
+        if (result.isCancelled) {
+          console.log('Login cancelled')
+        } else {
+          
+          this.props.navigation.navigate('Dashboard')
+          this.storeUser(JSON.stringify({
+            isFacebook: true
+          }))
+          console.log(result)
+        }
+      },
+      error => {
+        console.log('Login fail with error: ' + error)
+      }
+    )
+  }
   onLoginClick() {
     const {
       email,
@@ -161,16 +197,50 @@ export default class Login extends Component {
                   </Button>
                 </Form>
 
-
+                
                 <View style={styles.socailLogin}>
-                  <Button iconLeft small danger style={styles.floatLeft}>
-                    <Icon name='logo-googleplus' />
-                    <Text style={styles.font5}>Login with Google</Text>
-                  </Button>
+                  {/* <View style={[styles.floatLeft, {
+                    paddingRight: 10
+                  }]}>
+                    <LoginButton
+                      onLoginFinished={
+                        (error, result) => {
+                          if (error) {
+                            console.log("login has error: " + result.error);
+                          } else if (result.isCancelled) {
+                            console.log("login is cancelled.");
+                          } else {
+                            console.log({
+                              result
+                            })
+                            AccessToken.getCurrentAccessToken().then(
+                              (data) => {
+                                console.log({
+                                  data
+                                })
+                                if(data.accessToken){
+                                  this.props.navigation.navigate('Dashboard')
+                                  this.storeUser(JSON.stringify({
+                                    isFacebook: true
+                                  }))
+                                }
+                                console.log(data.accessToken.toString())
+                              }
+                            )
+                          }
+                        }
+                      }
+                      onLogoutFinished={() => console.log("logout.")}
+                    />
+                  </View> */}
                  
-                   <Button iconLeft small style={styles.floatRight}>
+                   <Button onPress={this.facebookLogin} iconLeft small style={styles.floatLeft}>
                     <Icon name='logo-facebook' />
                     <Text style={styles.font5}>Login with Facebook</Text>
+                  </Button>
+                   <Button onPress={this.facebookLogin} iconLeft small style={styles.floatRight}>
+                    <Icon name='logo-google' />
+                    <Text style={styles.font5}>Login with Google</Text>
                   </Button>
                
                 </View>

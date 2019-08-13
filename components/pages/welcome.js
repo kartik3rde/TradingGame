@@ -12,6 +12,7 @@ import {Platform, StyleSheet ,View , ImageBackground } from 'react-native';
 import { Container  ,Title ,Text 
   ,Subtitle,Button,Content,Body,
   Input, Item ,Icon, Left, Right} from 'native-base';
+import { AccessToken, } from 'react-native-fbsdk';  
 
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -28,16 +29,36 @@ export default class Welcome extends Component {
       if(user.id){
         this.props.navigation.navigate('Dashboard')
       }else{
-        this.props.navigation.navigate('Login')
+        // this.props.navigation.navigate('Login')
+        this.checkFbUser()
       }
     })
     .catch(err => {
       console.log({err})
-      this.props.navigation.navigate('Login')
+      this.checkFbUser()
+      // this.props.navigation.navigate('Login')
     })
   }
   static navigationOptions = {
     header: null
+  }
+  checkFbUser = () => {
+    AccessToken.getCurrentAccessToken().then(
+      (data) => {
+        console.log({
+          data
+        })
+        if(data.accessToken){
+          this.props.navigation.navigate('Dashboard')
+        }else{
+          this.props.navigation.navigate('Login')
+        }
+        console.log(data.accessToken.toString())
+      }
+    ).catch(err => {
+      console.log({err})
+      this.props.navigation.navigate('Login')
+    })
   }
   render() {
   

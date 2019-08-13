@@ -3,6 +3,7 @@ import { Image, View, Dimensions, StyleSheet, TouchableOpacity, TouchableNativeF
 
 import { Button, Icon , Text } from 'native-base';
 
+import { AccessToken, LoginManager } from 'react-native-fbsdk';
 // import App from "../index";
 
 class SideDrawer extends Component {
@@ -21,21 +22,22 @@ class SideDrawer extends Component {
     // componentWillUnmount(){
     //     removeAndroidBackButtonHandler()
     // }
-    removeUser = async ()=> {
-        try {
-            const value = await AsyncStorage.removeItem('user', (user)=>{
-                console.log('top Error', user);
-                if(user == null){
-                    console.log('null', user);
+    // removeUser = async ()=> {
+        
+    //     try {
+    //         const value = await AsyncStorage.removeItem('user', (user)=>{
+    //             console.log('top Error', user);
+    //             if(user == null){
+    //                 console.log('null', user);
                    
-                }else{
-                    console.log('not null', user);
-                }
-            });
-        } catch (error) {
-            console.error("bottom error", error)
-        }
-    }
+    //             }else{
+    //                 console.log('not null', user);
+    //             }
+    //         });
+    //     } catch (error) {
+    //         console.error("bottom error", error)
+    //     }
+    // }
     handlelogout = () => {
         Alert.alert('Confirm Logout', 'Are you realy want to logout?',
             [
@@ -51,6 +53,11 @@ class SideDrawer extends Component {
     };
 
     removeUser = async ()=> {
+        AccessToken.getCurrentAccessToken().then(data => {
+            if(data.accessToken){
+                LoginManager.logOut()
+            }
+        })
         try {
             const value = await AsyncStorage.removeItem('user', (user)=>{
                 console.log('top Error', user);

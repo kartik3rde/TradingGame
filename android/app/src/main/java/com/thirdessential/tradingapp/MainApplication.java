@@ -10,7 +10,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-// import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+
 
 //facebook data
 // import com.facebook.CallbackManager;
@@ -41,8 +42,8 @@ public class MainApplication extends Application implements ReactApplication {
             new MainReactPackage(),
             new SketchCanvasPackage(),
             new AsyncStoragePackage(),
-            new RNGestureHandlerPackage()
-           // new FBSDKPackage(mCallbackManager)
+            new RNGestureHandlerPackage(),
+            new FBSDKPackage()
       );
     }
 
