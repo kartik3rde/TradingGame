@@ -3,6 +3,7 @@ package com.thirdessential.tradingapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -11,6 +12,7 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
 
 //facebook data
@@ -40,10 +42,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
+            new RNGoogleSigninPackage(),
             new SketchCanvasPackage(),
             new AsyncStoragePackage(),
             new RNGestureHandlerPackage(),
-            new FBSDKPackage()
+            new FBSDKPackage(),
+            new RNGoogleSigninPackage()
       );
     }
 
