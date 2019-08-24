@@ -158,7 +158,10 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation 'com.android.support:support-v4:+'
     implementation "com.facebook.react:react-native:+"  // From node_modules
-   
+    implementation 'com.google.android.gms:play-services-analytics:16.0.0'
+
+
+
 }
 
 

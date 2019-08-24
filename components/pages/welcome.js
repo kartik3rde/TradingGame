@@ -15,6 +15,7 @@ import { Container  ,Title ,Text
 import { AccessToken, } from 'react-native-fbsdk';  
 
 import AsyncStorage from '@react-native-community/async-storage';
+import { GoogleSignin } from 'react-native-google-signin';
 
 export default class Welcome extends Component {
   constructor(props) {
@@ -23,6 +24,9 @@ export default class Welcome extends Component {
   }
 
   componentDidMount() {    
+    GoogleSignin.configure({
+      webClientId: '126075386294-03ghe713crv0v0j7ljkl5fpp03cg87c8.apps.googleusercontent.com', 
+    });
     AsyncStorage.getItem('user').then(res => {
       
       const user  = JSON.parse(res)

@@ -46,8 +46,7 @@ public class MainApplication extends Application implements ReactApplication {
             new SketchCanvasPackage(),
             new AsyncStoragePackage(),
             new RNGestureHandlerPackage(),
-            new FBSDKPackage(),
-            new RNGoogleSigninPackage()
+            new FBSDKPackage()
       );
     }
 
