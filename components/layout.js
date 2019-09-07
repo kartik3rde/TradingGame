@@ -13,6 +13,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Welcome from "./pages/welcome";
 import Registration from "./pages/registration";
 import SavePassword from "./pages/SavePassword";
+import Search from "./pages/Search";
 import CourseSingle from "./pages/CourseSingle";
 import Game from "./pages/Game";
 import Game2 from "./pages/Game2";
@@ -25,37 +26,7 @@ import LessionPage from "./pages/LessionPage";
 import { View, Text, Button } from "react-native";
 import SideDrawer from "./elements/SideDrawer"
 import { createStackNavigator, createAppContainer ,createDrawerNavigator,createSwitchNavigator} from 'react-navigation'; // 
-// const RootStack = createStackNavigator(
-//   {
-//     Home: Welcome,
-//     Login: Login,
-//     Registration: Registration,
-//     Dashboard:Dashboard,
-//     CourseSingle:CourseSingle,
-//     Game:Game,
-//     Game2:Game2,
-//     Game3:Game3,
-//     Game4:Game4,
-//     Game5:Game5,
-//     About:About,
-//     Course:Dashboard,
-//     QuizPage:QuizPage,
-//     LessionPage:LessionPage
-//   },
-//   { 
-//     initialRouteName: 'Dashboard',
-//   }
-// );
 
-// const AppContainer = createAppContainer(RootStack);
-
-// export default class Layout extends Component {
-  
-//   render() {
-//     return <AppContainer />;
-//   }
-  
-// }
 const setDrawerScreen = screen => ( {
   screen,
   navigationOptions: {
@@ -67,7 +38,8 @@ const inAppNavigator = createDrawerNavigator({
      Dashboard:setDrawerScreen(Dashboard),
      About:setDrawerScreen(About),
      LessionPage:setDrawerScreen(LessionPage),
-     QuizPage:setDrawerScreen(QuizPage)
+     QuizPage:setDrawerScreen(QuizPage),
+     Search:setDrawerScreen(Search)
     }, {
     navigationOptions: {
       header: null,

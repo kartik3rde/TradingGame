@@ -109,7 +109,25 @@ class SideDrawer extends Component {
                             </Text>
                         </View>
                     </View>
+
                 </TouchableNativeFeedback>
+                <TouchableNativeFeedback onPress={ ()=>{
+                    this.pushAndCloseSideMenu("Search", 'Search Symbol')
+                    }
+                } >
+                <View style={styles.sliderMenus}>
+                        <View style={styles.row}>
+                            <Text style={[styles.menuText, styles.menuLinkIcon]}>
+                                <Icon name='ios-search' style={styles.menuIcon} />
+                            </Text>
+                            <Text style={styles.menuText}>
+                                Search Symbol
+                            </Text>
+                        </View>
+                    </View>
+
+                </TouchableNativeFeedback>
+                
                
                 <TouchableNativeFeedback onPress={()=>{
                         this.handlelogout()
