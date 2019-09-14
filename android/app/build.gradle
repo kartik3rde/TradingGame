@@ -149,6 +149,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-svg')
    // implementation project(':react-native-fbsdk')
     implementation project(':@terrylinla_react-native-sketch-canvas')
     implementation project(':@react-native-community_async-storage')

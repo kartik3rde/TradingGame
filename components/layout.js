@@ -23,6 +23,7 @@ import Game5 from "./pages/Game5";
 import About from "./pages/About";
 import QuizPage from "./pages/QuizPage";
 import LessionPage from "./pages/LessionPage";
+import Trading from "./pages/Trading";
 import { View, Text, Button } from "react-native";
 import SideDrawer from "./elements/SideDrawer"
 import { createStackNavigator, createAppContainer ,createDrawerNavigator,createSwitchNavigator} from 'react-navigation'; // 
@@ -39,7 +40,8 @@ const inAppNavigator = createDrawerNavigator({
      About:setDrawerScreen(About),
      LessionPage:setDrawerScreen(LessionPage),
      QuizPage:setDrawerScreen(QuizPage),
-     Search:setDrawerScreen(Search)
+     Search:setDrawerScreen(Search),
+     Trading:setDrawerScreen(Trading)
     }, {
     navigationOptions: {
       header: null,
