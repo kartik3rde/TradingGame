@@ -6,6 +6,9 @@ import HTML from 'react-native-render-html';
 import Quiz from '../../controller/services/quiz';
 import { baseUrl } from '../../config';
 import Carousel from "react-native-carousel-control";
+import ImageView from 'react-native-image-view';
+import SingleLessonSlide from './SingleLessonSlide';
+
 const quiz = new Quiz;
 
 export default class LessionPage extends Component {
@@ -96,7 +99,7 @@ export default class LessionPage extends Component {
                         {quizStart ?
                             <View style={StyleSheet.detasilsSection}>
 
-                                <Text style={styles.courseDoneMsg}>All Lession completed in this course .</Text>
+                                <Text style={styles.courseDoneMsg}>All Lession completed in this fullWidth course .</Text>
                                 <Button bordered info style={styles.margin20} onPress={() => this.props.navigation.navigate('QuizPage', { itemId: courseId })}>
                                     <Text>Start Quiz</Text>
                                 </Button>
@@ -107,30 +110,43 @@ export default class LessionPage extends Component {
                                  pageStyle={ {
                                     padding:20
                                      } }>
-                                    {all_lession.map((itm, index) =>
-                                        <ScrollView  key={index} >
-                                            {
-                                            itm.GoToQuiz ? 
-                                            <View style={StyleSheet.detasilsSection}>
+                                    {all_lession.map((itm, index) =>{
+                                        // <ScrollView  key={index} >
+                                        //     {
+                                        //     itm.GoToQuiz ? 
+                                        //     <View style={StyleSheet.detasilsSection}>
                             
-                                                <Text style={styles.courseDoneMsg}>All Lession completed in this course .</Text>
-                                                <Button bordered info style={styles.margin20} onPress={() => this.props.navigation.navigate('QuizPage', { itemId: courseId })}>
-                                                    <Text>Start Quiz</Text>
-                                                </Button>
-                                            </View>
-                                            :
+                                        //         <Text style={styles.courseDoneMsg}>All Lession completed in this course .</Text>
+                                        //         <Button bordered info style={styles.margin20} onPress={() => this.props.navigation.navigate('QuizPage', { itemId: courseId })}>
+                                        //             <Text>Start Quiz</Text>
+                                        //         </Button>
+                                        //     </View>
+                                        //     :
                                                 
-                                            <View style={styles.detasilsSection} >
-                                                
-                                                <Image source={{ uri: baseUrl + itm.image }} style={{ height: 250, width: fullWidth, flex: 1 }} />
-                                                <Text style={styles.heading}>{itm.title}</Text>
-                                                <HTML html={itm.details} containerStyle={[{
-                                                    width: "100%",
-                                                    fontSize: 18
-                                                }]} imagesMaxWidth={fullWidth} />
-                                            </View>
-                                            }
-                                        </ScrollView>
+                                        //     <View style={styles.detasilsSection} >
+                                        //         <ImageView 
+                                        //         images={[
+                                        //             {
+                                        //                 source : { 
+                                        //                     uri: baseUrl + itm.image 
+                                        //                 },
+                                        //                 width: 806,
+                                        //                 height: 720,
+
+                                        //             }
+                                        //         ]}
+                                        //         />
+                                        //         <Image source={{ uri: baseUrl + itm.image }} style={{ height: 250, width: fullWidth, flex: 1 }} />
+                                        //         <Text style={styles.heading}>{itm.title}</Text>
+                                        //         <HTML html={itm.details} containerStyle={[{
+                                        //             width: "100%",
+                                        //             fontSize: 18
+                                        //         }]} imagesMaxWidth={fullWidth} />
+                                        //     </View>
+                                        //     }
+                                        // </ScrollView>
+                                        return <SingleLessonSlide {...this.props} courseId={courseId} slide={itm} />
+                                        }
                                     )}
                                     
 

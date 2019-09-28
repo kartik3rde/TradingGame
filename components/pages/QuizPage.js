@@ -104,7 +104,7 @@ export default class QuizPage extends Component {
     <Container >
       
       <MainHeader navigation={this.props.navigation}
-            title="About"
+            title="Quiz"
             /> 
      
       <Content>
