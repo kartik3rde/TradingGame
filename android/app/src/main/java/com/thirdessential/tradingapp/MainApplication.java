@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.horcrux.svg.SvgPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.terrylinla.rnsketchcanvas.SketchCanvasPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -11,8 +12,9 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
-// import com.facebook.reactnative.androidsdk.FBSDKPackage;
 
 //facebook data
 // import com.facebook.CallbackManager;
@@ -42,10 +44,11 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
             new MainReactPackage(),
             new SvgPackage(),
+            new RNGoogleSigninPackage(),
             new SketchCanvasPackage(),
             new AsyncStoragePackage(),
-            new RNGestureHandlerPackage()
-           // new FBSDKPackage(mCallbackManager)
+            new RNGestureHandlerPackage(),
+            new FBSDKPackage()
       );
     }
 

@@ -8,7 +8,7 @@
  */
 
 import React, {Component} from 'react';
-import { StyleSheet  ,ImageBackground  } from 'react-native';
+import { StyleSheet  ,ImageBackground,Image  } from 'react-native';
 import { Header, Content, Card, CardItem, Text,  Body,  } from 'native-base';
 import {baseUrl} from '../../config';
 
@@ -34,9 +34,9 @@ export default class CourseList extends Component {
        {courseArray && courseArray.length>0 ?
           courseArray.map((course,index)=>
           <Card style={styles.card}>
-            
+              
             <CardItem cardBody onPress={() => this.props.navigation.navigate('LessionPage',{itemId: course.id , itemName : course.title})}  >
-            <ImageBackground source={{uri: baseUrl +course.image}} style={{width: '100%', height: 200}}>
+            <ImageBackground source={require('../images/course_bg.png')} style={{width: '100%', height: 200}}>
             <Text style={styles.courseDoneMsg} onPress={() => this.props.navigation.navigate('LessionPage',{itemId: course.id , itemName : course.title})} >{course.title}</Text>
             </ImageBackground>
             </CardItem>
