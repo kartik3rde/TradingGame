@@ -28,7 +28,8 @@ export default class CourseSingle extends Component {
       open:false,
       courseId:0,
       baseUrl:'',
-      loder:true
+      loder:true,
+      youtubeStatus:false,
       };
       this.getSingleCourse = this.getSingleCourse.bind(this);
   }
@@ -81,6 +82,10 @@ export default class CourseSingle extends Component {
         <View style={StyleSheet.detasilsSection}>
             <Body style={styles.detasilsSection} >
                <Text style={styles.heading}>{courseData.title}</Text>
+               <Button block light style={styles.marginTB10} 
+                onPress={() => this.props.navigation.navigate('VideoPage',{itemId: courseId,videoID:''})}>
+                <Text >Play Video</Text>
+              </Button>
                <HTML html={courseData.details} containerStyle={[{
                   width: fullWidth
                 }]} imagesMaxWidth={fullWidth} /> 

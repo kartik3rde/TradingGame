@@ -103,6 +103,10 @@ export default class SingleLessonSlide extends Component {
                             </View>
                         </TouchableNativeFeedback >
                         <Text style={styles.heading}>{slide.title}</Text>
+                        <Button block light style={styles.marginTB10} 
+                            onPress={() => this.props.navigation.navigate('VideoPage',{itemId: courseId,videoID:''})}>
+                            <Text >Play Video</Text>
+                        </Button>
                         <HTML html={slide.details} containerStyle={[{
                             width: "100%",
                             fontSize: 18

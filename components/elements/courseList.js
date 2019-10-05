@@ -34,9 +34,9 @@ export default class CourseList extends Component {
        {courseArray && courseArray.length>0 ?
           courseArray.map((course,index)=>
           <Card style={styles.card}>
-              
+            
             <CardItem cardBody onPress={() => this.props.navigation.navigate('LessionPage',{itemId: course.id , itemName : course.title})}  >
-            <ImageBackground source={require('../images/course_bg.png')} style={{width: '100%', height: 200}}>
+            <ImageBackground source={{uri: 'https://www.carz91.com/tradeGame/assets/uploads/users/1137084142477949_bV6mZ02CuHKsDrIRW8Pe_height640.png'}} style={{width: '100%', height: 200}}>
             <Text style={styles.courseDoneMsg} onPress={() => this.props.navigation.navigate('LessionPage',{itemId: course.id , itemName : course.title})} >{course.title}</Text>
             </ImageBackground>
             </CardItem>
