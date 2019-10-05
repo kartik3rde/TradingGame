@@ -14,6 +14,7 @@ import Welcome from "./pages/welcome";
 import Registration from "./pages/registration";
 import SavePassword from "./pages/SavePassword";
 import Search from "./pages/Search";
+import VideoPage from "./pages/VideoPage";
 import CourseSingle from "./pages/CourseSingle";
 import Game from "./pages/Game";
 import Game2 from "./pages/Game2";
@@ -41,7 +42,8 @@ const inAppNavigator = createDrawerNavigator({
      LessionPage:setDrawerScreen(LessionPage),
      QuizPage:setDrawerScreen(QuizPage),
      Search:setDrawerScreen(Search),
-     Trading:setDrawerScreen(Trading)
+     Trading:setDrawerScreen(Trading),
+     VideoPage:setDrawerScreen(VideoPage)
     }, {
     navigationOptions: {
       header: null,
